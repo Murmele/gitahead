@@ -284,7 +284,7 @@ public:
         continue;
 
       // Index file name and path.
-      QFileInfo info(patch.name().toLower());
+      QFileInfo info(QString(patch.name()).toLower());
       result.fields[Index::Path][info.filePath().toUtf8()].append(filePos);
       result.fields[Index::File][info.fileName().toUtf8()].append(filePos++);
 

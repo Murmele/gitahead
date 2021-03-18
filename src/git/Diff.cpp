@@ -12,13 +12,17 @@
 #include "git2/patch.h"
 #include <algorithm>
 
-bool containsPath(QString &str, QString &occurence, Qt::CaseSensitivity cs)
+bool containsPath(const char* str, QString &occurence, Qt::CaseSensitivity cs)
 {
-    if (str.contains(occurence, cs)) {
-        if (str.count() == occurence.count()) {
+    std::string oc = occurence.toStdString();
+    int result = strncmp(occurence.toStdString().data(), str, occurence.length()) == 0;
+    if (result == 0)
+    {
+        int length = strlen(str);
+        if (length == occurence.length()) {
             // file/folder matches exactly
             return true;
-        }else if (str.count() >= occurence.length() + 1 && str[occurence.length()] == "/") {
+        }else if (length > occurence.length() &&  str[occurence.length()] == '/') {
             // file or folder in occurence
             return true;
         }
@@ -178,7 +182,7 @@ Patch Diff::patch(int index) const
   return Patch(patch);
 }
 
-QString Diff::name(int index) const
+const char* Diff::name(int index) const
 {
   return d->delta(index)->new_file.path;
 }

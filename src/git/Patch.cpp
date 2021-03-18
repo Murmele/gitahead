@@ -110,7 +110,7 @@ Repository Patch::repo() const
   return git_patch_owner(d.data());
 }
 
-QString Patch::name(Diff::File file) const
+const char* Patch::name(Diff::File file) const
 {
   const git_diff_delta *delta = git_patch_get_delta(d.data());
   return (file == Diff::NewFile) ? delta->new_file.path : delta->old_file.path;

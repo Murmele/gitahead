@@ -44,7 +44,7 @@ public:
 
   Repository repo() const;
 
-  QString name(Diff::File file = Diff::NewFile) const;
+  const char *name(Diff::File file = Diff::NewFile) const;
   git_delta_t status() const;
   bool isUntracked() const;
   bool isConflicted() const;

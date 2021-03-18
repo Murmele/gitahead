@@ -93,7 +93,7 @@ public:
    */
   void updateHunks(git::Patch stagedPatch);
   _FileWidget::Header *header() const;
-  QString name() const;
+  const char *name() const;
 
   QList<HunkWidget *> hunks() const;
 

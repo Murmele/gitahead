@@ -411,7 +411,7 @@ _FileWidget::Header *FileWidget::header() const
     return mHeader;
 }
 
-QString FileWidget::name() const { return mPatch.name(); }
+const char* FileWidget::name() const { return mPatch.name(); }
 
 QList<HunkWidget *> FileWidget::hunks() const { return mHunks; }
 

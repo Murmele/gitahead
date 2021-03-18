@@ -229,7 +229,7 @@ void DiffView::setFilter(const QStringList &paths)
   fetchAll();
   foreach (QWidget *widget, mFiles) {
     FileWidget *file = static_cast<FileWidget *>(widget);
-    QString name = file->name();
+    const char* name = file->name();
     bool contains = false;
     for (auto path : paths) {
         if (containsPath(name, path)) {

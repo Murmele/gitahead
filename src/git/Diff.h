@@ -28,7 +28,7 @@
  * \param cs Case sensitive or not
  * \return True when contains, otherwise false
  */
-bool containsPath(QString &str, QString &occurence, Qt::CaseSensitivity cs = Qt::CaseSensitive);
+bool containsPath(const char *str, QString &occurence, Qt::CaseSensitivity cs = Qt::CaseSensitive);
 
 
 namespace git {
@@ -83,7 +83,7 @@ public:
 
   int count() const;
   Patch patch(int index) const;
-  QString name(int index) const;
+  const char *name(int index) const;
   bool isBinary(int index) const;
   git_delta_t status(int index) const;
   Id id(int index, File file) const;
