@@ -84,6 +84,7 @@ public:
   int count() const;
   Patch patch(int index) const;
   QString name(int index) const;
+  QString name_(int index) const;
   bool isBinary(int index) const;
   git_delta_t status(int index) const;
   Id id(int index, File file) const;
@@ -124,6 +125,8 @@ private:
 
   friend class Commit;
   friend class Repository;
+
+  QVector<QString> mNames;
 };
 
 } // namespace git

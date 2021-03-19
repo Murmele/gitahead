@@ -14,7 +14,7 @@
 
 bool containsPath(QString &str, QString &occurence, Qt::CaseSensitivity cs)
 {
-    if (str.contains(occurence, cs)) {
+    if (str.startsWith(occurence, cs)) {
         if (str.count() == occurence.count()) {
             // file/folder matches exactly
             return true;
@@ -66,7 +66,13 @@ Diff::Diff() {}
 
 Diff::Diff(git_diff *diff)
   : d(diff ? new Data(diff) : nullptr)
-{}
+{
+    if (d) {
+        for (int i =0; i < count(); i++) {
+            mNames.append(name_(i));
+        }
+    }
+}
 
 Diff::operator git_diff *() const
 {
@@ -179,6 +185,13 @@ Patch Diff::patch(int index) const
 }
 
 QString Diff::name(int index) const
+{
+  if (mNames.length() <= index)
+      return "";
+  return mNames[index];
+}
+
+QString Diff::name_(int index) const
 {
   return d->delta(index)->new_file.path;
 }
