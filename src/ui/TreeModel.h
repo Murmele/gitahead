@@ -17,6 +17,10 @@
 #include <QAbstractItemModel>
 #include <QFileIconProvider>
 
+/*!
+ * \brief The TreeModel class
+ * Used to show the complete tree.
+ */
 class TreeModel : public QAbstractItemModel
 {
   Q_OBJECT
@@ -85,7 +89,7 @@ private:
     ~Node();
 
     QString name() const;
-    QString path(bool relative = false) const;
+    const char *path(bool relative = false) const;
 
     Node *parent() const;
     bool hasChildren() const;

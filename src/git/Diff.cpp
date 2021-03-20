@@ -12,22 +12,63 @@
 #include "git2/patch.h"
 #include <algorithm>
 
-bool containsPath(const char* str, QString &occurence, Qt::CaseSensitivity cs)
-{
-    std::string oc = occurence.toStdString();
-    int result = strncmp(occurence.toStdString().data(), str, occurence.length()) == 0;
-    if (result == 0)
+namespace  {
+    int prefix(const char *pre, const char *str)
     {
-        int length = strlen(str);
-        if (length == occurence.length()) {
-            // file/folder matches exactly
-            return true;
-        }else if (length > occurence.length() &&  str[occurence.length()] == '/') {
-            // file or folder in occurence
-            return true;
+        char cp;
+        char cs;
+
+        if (!*pre)
+            return 1;
+
+        cp = *pre;
+        cs = *str;
+
+        while (cp && cs)
+        {
+            if (cp != cs)
+                return 0;
+
+            cp = *(pre++);
+            cs = *(str++);
         }
+
+        if (!cp && !cp)
+            return 1; // both strings have exact same length
+        else if (!cs)
+            return 0; // pre is longer than str
+        else if (cs == '/') // pre is prefix of str
+            return 2;
+
+        return 0;
+    }
+}
+
+bool containsPath(const char* str, const char*occurence, Qt::CaseSensitivity cs)
+{
+    int res = prefix(occurence, str);
+    if (res == 1) {
+        // file/folder matches exactly
+        return true;
+    } else if (res == 2) {
+        return true;
     }
     return false;
+
+//    std::string oc = occurence.toStdString();
+//    int result = strncmp(occurence.toStdString().data(), str, occurence.length()) == 0;
+//    if (result == 0)
+//    {
+//        int length = strlen(str);
+//        if (length == occurence.length()) {
+//            // file/folder matches exactly
+//            return true;
+//        }else if (length > occurence.length() &&  str[occurence.length()] == '/') {
+//            // file or folder in occurence
+//            return true;
+//        }
+//    }
+//    return false;
 }
 
 namespace git {

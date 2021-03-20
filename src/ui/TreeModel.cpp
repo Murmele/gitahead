@@ -176,10 +176,9 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
         return QString();
 
       QString status;
-      QString prefix = node->path(true);
+      const char* prefix = node->path(true);
       for (int i = 0; i < mDiff.count(); ++i) {
-        QString name = mDiff.name(i);
-        if (containsPath(name, prefix)) {
+        if (containsPath(mDiff.name(i), prefix)) {
           QChar ch = git::Diff::statusChar(mDiff.status(i));
           if (!status.contains(ch))
             status.append(ch);
@@ -278,10 +277,10 @@ QString TreeModel::Node::name() const
   return mName;
 }
 
-QString TreeModel::Node::path(bool relative) const
+const char* TreeModel::Node::path(bool relative) const
 {
   bool root = (!mParent || (relative && !mParent->mParent));
-  return !root ? mParent->path(relative) % "/" % mName : mName;
+  return nullptr; //!root ? mParent->path(relative) % "/" % mName : mName;
 }
 
 TreeModel::Node *TreeModel::Node::parent() const

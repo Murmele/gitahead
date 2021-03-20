@@ -17,6 +17,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QVBoxLayout>
+#include <QElapsedTimer>
 
 #ifdef Q_OS_WIN
 #define ICON_SIZE 48
@@ -129,9 +130,12 @@ int TreeView::countCollapsed(QModelIndex parent)
 
 void TreeView::expandAll()
 {
+    QElapsedTimer tim;
+    tim.start();
     mSupressItemExpandStateChanged = true;
     QTreeView::expandAll();
     mSupressItemExpandStateChanged = false;
+    qint64 elapsed = tim.elapsed();
     setCollapseCount(0);
 }
 

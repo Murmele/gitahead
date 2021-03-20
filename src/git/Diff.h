@@ -28,7 +28,7 @@
  * \param cs Case sensitive or not
  * \return True when contains, otherwise false
  */
-bool containsPath(const char *str, QString &occurence, Qt::CaseSensitivity cs = Qt::CaseSensitive);
+bool containsPath(const char *str, const char* pre, Qt::CaseSensitivity cs = Qt::CaseSensitive);
 
 
 namespace git {
