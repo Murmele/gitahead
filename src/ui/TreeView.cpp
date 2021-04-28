@@ -88,6 +88,7 @@ void TreeView::discard(const QModelIndex& index)
             view->error(parent, tr("discard"), patchName);
         }
     });
+    dialog->open();
 }
 
 void TreeView::onCustomContextMenu(const QPointF& point)
