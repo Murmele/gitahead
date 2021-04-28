@@ -618,13 +618,4 @@ void FileWidget::headerCheckStateChanged(int state)
         emit stageStateChanged(mModelIndex, git::Index::Staged);
     else
         emit stageStateChanged(mModelIndex, git::Index::Unstaged);
-
-//    mSupressStaging = true;
-//    bool staged = state == Qt::Checked ? true : false;
-//    for (int i = 0; i < mHunks.size(); ++i)
-//        mHunks[i]->setStaged(staged);
-//    mSupressStaging = false;
-
-//    // complete file must be staged
-//    stageHunks(true, staged);
 }

@@ -102,6 +102,7 @@ public:
     int role = Qt::EditRole) override;
 
   void createDiffTree();
+  bool discard(const QModelIndex &index);
   /*!
    * Setting the data to the item
    * \brief setData
